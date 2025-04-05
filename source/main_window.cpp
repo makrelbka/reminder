@@ -13,25 +13,21 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
     
     this->setStyleSheet(R"(
-        QLineEdit {
-            background-color:rgb(0, 0, 0);
-            border: 1px solidrgb(255, 255, 255);
-            border-radius: 4px;
-            padding: 5px 10px;
-            font: 14px Arial;
+        QWidget {
+            background-color: rgb(0, 0, 0);
         }
-        
-        QPushButton {
-            background-color:rgb(0, 0, 0);
-            border: 1px solidrgb(255, 255, 255);
+        QLineEdit, QPushButton {
+            background-color: rgb(0, 0, 0);
+            border: 1px solid rgb(255, 255, 255);
             border-radius: 4px;
             padding: 5px 10px;
             font: 14px Arial;
+            color: white;
+            min-width: 100px;
         }
     )");
 
-    setWindowTitle("Write, if you want to remember ;)");
-    
+    setWindowTitle("Write to remember!");
     layout = new QVBoxLayout; 
     notes_layout = new QVBoxLayout;
     layout->addLayout(notes_layout);
@@ -56,6 +52,7 @@ void MainWindow::addNote() {
     
     QWidget* row = new QWidget();
     QHBoxLayout* note_layout = new QHBoxLayout(row);
+    note_layout->setContentsMargins(0, 0, 0, 0);
     
     QPushButton* completedButton = new QPushButton("<><");
     completedButton->setFixedWidth(completedButton->sizeHint().width());
@@ -63,6 +60,8 @@ void MainWindow::addNote() {
     
     note_layout->addWidget(editButton);
     note_layout->addWidget(completedButton);
+    note_layout->addWidget(editButton, 4);   
+    note_layout->addWidget(completedButton, 1);
     
     notes_layout->addWidget(row); 
     connect(completedButton, &QPushButton::clicked, this, &MainWindow::delNote);
