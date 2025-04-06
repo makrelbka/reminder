@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
             padding: 5px 10px;
             font: 14px Arial;
             color: white;
-            min-width: 100px;
         }
     )");
 
